@@ -1,0 +1,18 @@
+Order Deny,Allow
+Allow from all
+
+Satisfy Any
+
+Options -Indexes -MultiViews
+<IfModule mod_rewrite.c>
+	RewriteEngine On
+
+	RewriteRule ^party-center$ ?page=clubs&club=1 [L,QSA]
+	RewriteRule ^hiclub$ ?page=clubs&club=2 [L,QSA]
+	RewriteRule ^events$ ?page=events [L,QSA]
+	RewriteRule ^reservations$ ?page=reservations [L,QSA]
+	RewriteRule ^online-shop$ ?page=online-shop [L,QSA]
+	RewriteRule ^contacts$ ?page=contacts [L,QSA]
+	RewriteRule ^albums/([\d]+)$ ?page=gallery&id=$1 [L,QSA]
+
+</IfModule>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="<!--{$LANG}-->">
+	<head>
+		<meta charset="utf-8" />
+		<title>Администрация <!--{$TITLE}--></title>
+		<link href="<!--{$CSS}-->general.css?<!--{$LAST_UPDATE}-->" rel="stylesheet" type="text/css" />
+		<link href="<!--{$CSS_COMMON}-->jquery-plugins.css?<!--{$LAST_UPDATE}-->" rel="stylesheet" type="text/css" />
+		<link href="<!--{$CSS}-->printer.css?<!--{$LAST_UPDATE}-->" rel="stylesheet" type="text/css" media="print" />
+		<link rel="shortcut icon" href="<!--{$URL}-->admin/favicon.ico?<!--{$LAST_UPDATE}-->" />
+	</head>
+	<body>
+		<div id="container">
+			<div id="header">
+				<h1>PartyPlay Center администрация <!--{$YEAR}--></h1>
+			</div>
+			<div id="menu">
+				<ul>
+				<!--{if $LOGGED}-->
+					<li <!--{if $PAGE eq 'reservations'}-->class="active"<!--{/if}-->><a href="<!--{$URL}-->admin/?page=reservations">Резервации</a></li>
+					<li <!--{if $PAGE eq 'menu'}-->class="active"<!--{/if}-->><a href="<!--{$URL}-->admin/?page=menu">Меню</a></li>
+					<li <!--{if $PAGE eq 'events'}-->class="active"<!--{/if}-->><a href="<!--{$URL}-->admin/?page=events">Събития</a></li>
+					<li <!--{if $PAGE eq 'albums'}-->class="active"<!--{/if}-->><a href="<!--{$URL}-->admin/?page=albums">Албуми</a></li>
+					<li <!--{if $PAGE eq 'settings'}-->class="active"<!--{/if}-->><a href="<!--{$URL}-->admin/?page=settings">Настройки</a></li>
+					<li <!--{if $PAGE eq 'profile'}-->class="active"<!--{/if}-->><a href="<!--{$URL}-->admin/?page=profile">Профил</a></li>
+					<li class="right"><a href="<!--{$URL}-->admin/?page=logout&amp;token=<!--{$TOKEN}-->">Изход</a></li>
+				<!--{else}-->
+					<li class="active"><a href="<!--{$URL}-->admin/">Вход</a></li>
+					<li><a href="<!--{$URL}-->">PartyPlay Center &raquo;</a></li>
+				<!--{/if}-->
+				</ul>
+			</div>
+			<!--{if $FATAL_ERROR}-->
+				<div class="error"><!--{$FATAL_ERROR}--></div>
+			<!--{else}-->
+
+				<!--{if $PAGE}-->
+					<!--{include file="`$PAGE`.html"}-->
+				<!--{/if}-->
+			<!--{/if}-->
+		</div>
+
+		<script type="text/javascript">
+			var URL = '<!--{$URL}-->';
+		</script>
+		<script type="text/javascript" src="<!--{$JS_COMMON}-->jquery.js"></script>
+		<script type="text/javascript" src="<!--{$JS_COMMON}-->jquery-plugins.js?<!--{$LAST_UPDATE}-->"></script>
+		<script type="text/javascript" src="<!--{$JS}-->general.js?<!--{$LAST_UPDATE}-->"></script>
+	</body>
+</html>

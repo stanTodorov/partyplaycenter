@@ -1,0 +1,302 @@
+<h2>Резервации</h2>
+
+<form id="reservationForm" method="post" action="<!--{$URL}--><!--{$PAGE}-->">
+
+	<div class="forms">
+	<!--{if $SUCCESS}-->
+		<p>Резервациията е успешно добавена. Тя е валидна 24 часа. Вашият код за потвърждение е <span id="code"><!--{$CODE}--></span>. </p>
+
+		<br />
+		<p>За да я потвърдите, моля да заплатите 50 лв в PartyPlay Center като използвате вашият код за резервация.</p>
+
+		<br />
+		<p>Благодарим Ви!</p>
+
+	<!--{else}-->
+		<p><img alt="" src="<!--{$IMG}-->logo-partyplay.jpg" style="float: right; margin: 0 0 10px 10px" /> Fusce feugiat commodo libero, id feugiat ligula tincidunt vel. Cras ac dui eu nulla fringilla placerat. Fusce tincidunt euismod eros at ultrices. Mauris ac eros felis. Donec feugiat luctus tortor, nec semper mauris consectetur sit amet. Aliquam erat volutpat. Fusce ac velit mauris. Aenean porta tempor nisi, id scelerisque magna volutpat accumsan. Donec bibendum, augue id mollis bibendum, turpis purus malesuada enim, sit amet accumsan enim eros sed diam. Curabitur est nibh, suscipit id mattis et, viverra nec velit. Aenean quis nibh orci, et sodales risus. </p>
+		<br />
+
+		<!--{if $ERROR}--><div class="error"><!--{$ERROR}--></div><!--{/if}-->
+
+		<div class="sep">
+			Основни данни за партито
+			<small class="nl">Отбелязаните със звездичка (*) полета са задължителни!</small>
+		</div>
+
+		<div class="row">
+			<label>Дата и час на партито <span class="mark">*</span></label>
+
+			<div class="cell">
+				<input type="text" class="text small datepicker" name="date" value="<!--{$RESULT.date|escape}-->" />
+				<select name="time" class="fixed-small">
+				<!--{section name=i loop=$TIMES}-->
+					<option value="<!--{$TIMES[i].id}-->" <!--{if $RESULT.time eq $TIMES[i].id}-->selected="selected"<!--{/if}-->><!--{$TIMES[i].name}--></option>
+				<!--{/section}-->
+				</select>
+				<!--{if $ERRORS.date}--><div class="small-error"><!--{$ERRORS.date}--></div><!--{/if}-->
+			</div>
+		</div>
+
+		<div class="row">
+			<label>Вашето име <span class="mark">*</span></label>
+
+			<div class="cell">
+				<input type="text" class="text" name="name" value="<!--{$RESULT.name|escape}-->" />
+				<!--{if $ERRORS.name}--><div class="small-error"><!--{$ERRORS.name}--></div><!--{/if}-->
+			</div>
+		</div>
+
+		<div class="row">
+			<label>Телефон за връзка <span class="mark">*</span></label>
+
+			<div class="cell">
+				<input type="text" class="text" name="phone" value="<!--{$RESULT.phone|escape}-->" />
+				<!--{if $ERRORS.phone}--><div class="small-error"><!--{$ERRORS.phone}--></div><!--{/if}-->
+			</div>
+		</div>
+
+		<div class="row">
+			<label>E-mail за връзка <span class="mark">*</span></label>
+
+			<div class="cell">
+				<input type="text" class="text" name="email" value="<!--{$RESULT.email|escape}-->" />
+				<!--{if $ERRORS.email}--><div class="small-error"><!--{$ERRORS.email}--></div><!--{/if}-->
+			</div>
+		</div>
+
+		<div class="row">
+			<label>Име на детето <span class="mark">*</span></label>
+
+			<div class="cell">
+				<input type="text" class="text" name="kid" value="<!--{$RESULT.kid|escape}-->" />
+				<!--{if $ERRORS.kid}--><div class="small-error"><!--{$ERRORS.kid}--></div><!--{/if}-->
+			</div>
+		</div>
+
+		<div class="row">
+			<label>Възраст на детето <span class="mark">*</span></label>
+
+			<div class="cell">
+				<input type="text" class="text tiny isInteger" name="age" data-value-between="1|" value="<!--{$RESULT.age|escape}-->" />
+				<a href="#" class="valueSubAdd" data-operation="sub"><img src="<!--{$IMG}-->minus.png" alt="-" title="" /></a>
+				<a href="#" class="valueSubAdd" data-operation="add"><img src="<!--{$IMG}-->plus.png" alt="+" title="" /></a>
+				години
+				<!--{if $ERRORS.age}--><div class="small-error"><!--{$ERRORS.age}--></div><!--{/if}-->
+			</div>
+		</div>
+
+		<div class="row">
+			<label>Брой деца <span class="mark">*</span><small class="nl">(Заедно с празнуващото дете)</small></label>
+
+			<div class="cell">
+				<input type="text" class="text tiny isInteger" name="count" data-value-between="1|" value="<!--{$RESULT.count|escape}-->" />
+				<a href="#" class="valueSubAdd" data-operation="sub"><img src="<!--{$IMG}-->minus.png" alt="-" title="" /></a>
+				<a href="#" class="valueSubAdd" data-operation="add"><img src="<!--{$IMG}-->plus.png" alt="+" title="" /></a>
+
+				<!--{if $ERRORS.count}--><div class="small-error"><!--{$ERRORS.count}--></div><!--{/if}-->
+			</div>
+		</div>
+
+		<div class="sep">Парти</div>
+
+		<div class="row">
+			<label>Парти зона</label>
+
+			<div class="cell">
+				<select name="zone" class="fixed toggle" id="partyZone">
+				<!--{section name=i loop=$ZONES}-->
+					<option value="<!--{$ZONES[i].id}-->" <!--{if $RESULT.zone eq $ZONES[i].id}-->selected="selected"<!--{/if}-->><!--{$ZONES[i].name}--></option>
+				<!--{/section}-->
+				</select>
+
+
+				<!--{if $ERRORS.zone}--><div class="small-error"><!--{$ERRORS.zone}--></div><!--{/if}-->
+			</div>
+		</div>
+
+		<div class="row partyZone partyZone3">
+			<label>Парти в дискотека</label>
+			<div class="cell">100 лв.</div>
+		</div>
+
+		<div class="row">
+			<label>Продълж. на партито</label>
+			<div class="cell">
+				<div class="partyZone partyZone1 partyZone2">
+					<select name="duration" class="fixed toggle" id="partyDuration">
+						<option <!--{if $RESULT.duration eq 2}-->selected="selected"<!--{/if}--> value="2">2 часа (x 10,00 лв/дете)</option>
+						<option <!--{if $RESULT.duration eq 3}-->selected="selected"<!--{/if}--> value="3">3 часа (x 12,00 лв/дете)</option>
+					</select>
+				</div>
+
+				<div class="partyZone partyZone3">3 часа (x 8,00 лв/дете)</div>
+
+			</div>
+		</div>
+
+		<div class="row">
+			<label>Детско меню</label>
+			<div class="cell">
+				<select name="kidsMenu" class="fixed">
+				<!--{section name=i loop=$KIDS_MENU}-->
+					<option value="<!--{$KIDS_MENU[i].id}-->"><!--{$KIDS_MENU[i].name|escape}--></option>
+				<!--{/section}-->
+				</select>
+			</div>
+		</div>
+
+		<div class="row">
+			<label>Тематично парти</label>
+			<div class="cell">
+				<select name="subject" class="toggle fixed" id="partySubject">
+					<option value="0" <!--{if $RESULT.subject eq 0}-->selected="selected"<!--{/if}-->>Без тематика</option>
+					<option value="1" <!--{if $RESULT.subject eq 1}-->selected="selected"<!--{/if}-->>Парти Плей</option>
+					<option value="2" <!--{if $RESULT.subject eq 2}-->selected="selected"<!--{/if}-->>Живко Драгостинов</option>
+				</select>
+			</div>
+		</div>
+
+		<div class="row partySubject partySubject1">
+			<label>Продълж. на тематичното парти</label>
+			<div class="cell">
+				<select name="subjectDuration1" class="toggle fixed">
+					<option value="1" <!--{if $RESULT.subjectDuration1 eq 1}-->selected="selected"<!--{/if}-->>1 ч. (40,00 лв.)</option>
+					<option value="2" <!--{if $RESULT.subjectDuration1 eq 2}-->selected="selected"<!--{/if}-->>1.30 ч. (60,00 лв.)</option>
+				</select>
+			</div>
+		</div>
+
+		<div class="row partySubject partySubject2">
+			<label>Продълж. на тематичното парти</label>
+			<div class="cell">
+				<select name="subjectDuration2" class="toggle fixed">
+					<option value="1" <!--{if $RESULT.subjectDuration2 eq 1}-->selected="selected"<!--{/if}-->>1 ч. (60,00 лв.)</option>
+					<option value="2" <!--{if $RESULT.subjectDuration2 eq 2}-->selected="selected"<!--{/if}-->>1.30 ч. (90,00 лв.)</option>
+				</select>
+			</div>
+		</div>
+
+
+		<div class="row partySubject partySubject1">
+			<label>Парти Плей</label>
+			<div class="cell">
+				<select name="partySubject1" class="fixed">
+				<!--{section name=i loop=$PARTY_SUBJECT_1}-->
+					<option value="<!--{$PARTY_SUBJECT_1[i].id}-->" <!--{if $RESULT.partySubject1 eq $PARTY_SUBJECT_1[i].id}-->selected="selected"<!--{/if}-->><!--{$PARTY_SUBJECT_1[i].name}--></option>
+				<!--{/section}-->
+				</select>
+			</div>
+		</div>
+
+		<div class="row partySubject partySubject2">
+			<label>Живко Драгостинов</label>
+			<div class="cell">
+				<select name="partySubject2" class="fixed">
+				<!--{section name=i loop=$PARTY_SUBJECT_2}-->
+					<option value="<!--{$PARTY_SUBJECT_2[i].id}-->" <!--{if $RESULT.partySubject2 eq $PARTY_SUBJECT_2[i].id}-->selected="selected"<!--{/if}-->><!--{$PARTY_SUBJECT_2[i].name}--></option>
+				<!--{/section}-->
+				</select>
+			</div>
+		</div>
+
+		<div class="sep">Допълнителни</div>
+
+		<div class="row">
+			<label>Кетъринг</label>
+			<div class="cell">
+				<select name="cateringCategories" class="fixed toggle" id="cateringCategories">
+				<!--{section name=i loop=$CATERING}-->
+					<option value="<!--{$CATERING[i].id}-->" <!--{if $RESULT.cateringCategories eq $CATERING[i].id}-->selected="selected"<!--{/if}-->><!--{$CATERING[i].name}--></option>
+				<!--{/section}-->
+				</select>
+			</div>
+		</div>
+
+		<div id="cateringList">
+
+			<!--{section name=i loop=$CATERING}-->
+			<table class="cateringCategories cateringCategories<!--{$CATERING[i].id}-->" style="width: 100%">
+				<!--{section name=j loop=$CATERING[i].menu}-->
+					<tr <!--{if $CATERING[i].menu[j].odd}-->class="odd"<!--{/if}-->>
+						<td style="width: 246px; padding-left: 5px; text-align: left">
+						<!--{if $CATERING[i].menu[j].thumb AND $CATERING[i].menu[j].image}-->
+							<a class="zoom showThumb" href="<!--{$CATERING[i].menu[j].image}-->" data-url="<!--{$CATERING[i].menu[j].thumb}-->">
+								<!--{$CATERING[i].menu[j].name}-->
+							</a>
+						<!--{else}-->
+							<!--{$CATERING[i].menu[j].name}-->
+						<!--{/if}-->
+
+						<!--{if $CATERING[i].menu[j].comment}-->
+							<small class="nl">(<!--{$CATERING[i].menu[j].comment}-->)</small>
+						<!--{/if}-->
+						</td>
+
+						<td style="width: 75px"><!--{$CATERING[i].menu[j].amount}--></td>
+						<td style="width: 75px"><!--{$CATERING[i].menu[j].price}--></td>
+
+						<td class="qty" style="width: 100px" title="Изберете количество">
+							x
+							<input type="text" class="text" style="width: 25px" data-value-between="0|100" name="catering[<!--{$CATERING[i].menu[j].id}-->]" value="<!--{$RESULT.catering[$CATERING[i].menu[j].id]|default:"0"}-->" />
+							<a href="#" class="valueSubAdd" data-operation="sub"><img src="<!--{$IMG}-->minus.png" alt="-" title="" /></a>
+							<a href="#" class="valueSubAdd" data-operation="add"><img src="<!--{$IMG}-->plus.png" alt="+" title="" /></a>
+						</td>
+					</tr>
+				<!--{/section}-->
+				</table>
+			<!--{/section}-->
+		</div>
+
+		<div class="row">
+			<label>Торта от (URL адрес)<small class="nl">(напр.: http://example.com/)</small></label>
+			<div class="cell">
+				<input type="text" class="text" name="cakeUrl" value="<!--{$RESULT.cakeUrl|escape}-->" />
+				<!--{if $ERRORS.cakeUrl}--><div class="small-error"><!--{$ERRORS.cakeUrl}--></div><!--{/if}-->
+			</div>
+		</div>
+
+		<div class="row">
+			<label>Фотосесия (URL адрес)<small class="nl">(напр.: http://example.com/)</small></label>
+			<div class="cell">
+				<input type="text" class="text" name="photoUrl" value="<!--{$RESULT.photoUrl|escape}-->" />
+				<!--{if $ERRORS.photoUrl}--><div class="small-error"><!--{$ERRORS.photoUrl}--></div><!--{/if}-->
+			</div>
+		</div>
+
+		<div class="row">
+			<label>Бележка</label>
+			<div class="cell">
+				<textarea class="text" name="note" rows="50" cols="50"><!--{$RESULT.note|escape}--></textarea>
+				<!--{if $ERRORS.note}--><div class="small-error"><!--{$ERRORS.note}--></div><!--{/if}-->
+			</div>
+		</div>
+
+		<div class="sep">Цени</div>
+
+		<div class="row">
+			<label>Обща цена</label>
+			<div class="cell">
+				<strong id="price"><!--{$PRICE.total}--></strong>
+			</div>
+		</div>
+
+		<div class="row">
+			<label>Капаро (30% от цената)</label>
+			<div class="cell">
+				<strong id="earnest"><!--{$PRICE.earnest}--></strong>
+			</div>
+		</div>
+
+		<div class="center">
+			<br />
+			<input type="hidden" name="token" value="<!--{$TOKEN}-->" />
+			<a class="button" href="#" id="calcReservation" title="Пресмятане на общата сума до момента"> Пресмятане на сумата</a>
+			<span class="button"><button type="submit" name="submit">Резервирай</button></span>
+		</div>
+		
+		<pre>
+			<!--{$OPAAA}-->
+		</pre>
+	</div>
+	<!--{/if}-->
+</form>

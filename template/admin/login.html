@@ -1,0 +1,20 @@
+<h2>Вход в системата</h2>
+
+<form method="post" action="<!--{$URL}-->admin/">
+<!--{if $ERROR}--><div class="error"><!--{$ERROR}--></div><!--{/if}-->
+	<table class="layout">
+		<tr>
+			<th>Потребителско име</th>
+			<td><input type="text" class="text" name="username" id="username" maxlength="16" value="" /></td>
+		</tr>
+		<tr>
+			<th>Парола</th>
+			<td><input type="password" class="text" name="password" id="password" maxlength="64" value="" /></td>
+		</tr>
+	</table>
+	<div class="buttons">
+		<span class="button"><button type="submit" name="login">Вход</button></span>
+	</div>
+</form>
+
+

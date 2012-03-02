@@ -1,0 +1,8 @@
+<!--{if $ACTION eq 'albums'}-->
+
+		<option value="0">&raquo; Нов албум</option>
+	<!--{section name=i loop=$RESULT}-->
+		<option value="<!--{$RESULT[i].id}-->"><!--{$RESULT[i].name|escape}--></option>
+	<!--{/section}-->
+
+<!--{/if}-->

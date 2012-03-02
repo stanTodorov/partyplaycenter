@@ -1,0 +1,58 @@
+
+<form method="post" enctype="multipart/form-data" action="<!--{$URL}-->admin/?page=<!--{$PAGE}-->&amp;action=add">
+
+	<table class="layout">
+		<caption>Нов албум или добавяне на снимки към албум</caption>
+		<tr>
+			<th>За клуб</th>
+			<td>
+				<select name="club" style="width: 200px" id="getAlbumsByClub">
+				<!--{section name=i loop=$FORMS.clubs}-->
+					<option value="<!--{$FORMS.clubs[i].id}-->" <!--{if $RESULT.club eq $FORMS.clubs[i].id}-->selected="selected"<!--{/if}-->><!--{$FORMS.clubs[i].name}--></option>
+				<!--{/section}-->
+				</select>
+				
+				<!--{if $ERRORS.club}--><div class="small-error"><!--{$ERRORS.club}--></div><!--{/if}-->
+			</td>
+		</tr>
+
+		<tr>
+			<th>Албум</th>
+			<td>
+				<select name="album" style="width: 200px" id="addAlbum">
+					<option value="0">&raquo; Нов албум</option>
+				<!--{section name=i loop=$FORMS.albums}-->
+					<option value="<!--{$FORMS.albums[i].id}-->" <!--{if $RESULT.album eq $FORMS.albums[i].id}-->selected="selected"<!--{/if}-->><!--{$FORMS.albums[i].name|escape}--></option>
+				<!--{/section}-->
+				</select>
+
+				<!--{if $ERRORS.albums}--><div class="small-error"><!--{$ERRORS.albums}--></div><!--{/if}-->
+			</td>
+		</tr>
+
+
+		<tr id="addAlbumName" class="<!--{if $RESULT.album}-->hidden<!--{/if}-->">
+			<th>Заглавие</th>
+			<td>
+				<input type="text" class="text" name="name" value="<!--{$RESULT.name|escape}-->" />
+				<!--{if $ERRORS.name}--><div class="small-error"><!--{$ERRORS.name}--></div><!--{/if}-->
+			</td>
+		</tr>
+
+		<tr>
+			<th>Снимка (<a class="icon" href="#" id="addUploadField"><span class="add no-text"></span></a>)</th>
+			<td id="uploadFields">
+				<div><input type="file" name="pictures[]" /></div>
+				<div><input type="file" name="pictures[]" /></div>
+			</td>
+		</tr>
+		
+		<tr>
+			<th>&nbsp;</th>
+			<td>Максимален размер на прикачените снимки: <strong><!--{$UPLOAD_LIMIT}--></strong></td>
+		</tr>
+	</table>
+
+<div class="buttons">
+	<span class="button"><button type="submit" name="submit">Добавяне</button></span>
+</div>

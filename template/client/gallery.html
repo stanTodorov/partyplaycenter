@@ -1,0 +1,28 @@
+<div class="album-heading">
+	<h3>Албум „<!--{$ALBUM.name|escape}-->“</h3>
+	<p>Добавено: <!--{$ALBUM.date}--></p>
+</div>
+
+<ul class="gallery-list">
+<!--{section name=i loop=$RESULT}-->
+	<li>
+		<a href="<!--{$RESULT[i].image}-->" class="zoom" rel="gallery"><span class="image" style="background-image: url('<!--{$RESULT[i].thumb}-->')"></span></a>
+	</li>
+<!--{/section}-->
+</ul>
+
+<div class="album-footer">
+	<div class="gallery-albums">
+		<a href="#" class="arrows left"></a>
+
+		<div class="slide">
+			<ul>
+			<!--{section name=i loop=$ALBUMS}-->
+				<li><a href="<!--{$URL}-->albums/<!--{$ALBUMS[i].id}-->"><span class="image" style="background-image: url('<!--{$ALBUMS[i].thumb}-->')"></span></a></li>
+			<!--{/section}-->
+			</ul>
+		</div>
+
+		<a href="#" class="arrows right"></a>
+	</div>
+</div>

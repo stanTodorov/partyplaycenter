@@ -1,0 +1,45 @@
+<div id="printer">
+	<a href="#" onclick="window.print()" class="icon"><span class="printer"></span>Отпечатване</a>
+</div>
+
+<table class="layout">
+	<tr>
+		<th>Код</th>
+		<td><!--{$RESULT.id}--></td>
+	</tr>
+
+	<tr>
+		<th>Резервация</th>
+		<td><!--{$RESULT.date}--></td>
+	</tr>
+
+	<!--{$RESULT.content}-->
+
+	<tr><td colspan="2">&nbsp;</td></tr>
+
+	<tr>
+		<th>Обща сума</th>
+		<td><!--{$RESULT.price}--></td>
+	</tr>
+
+	<tr>
+		<th>Капаро 30%</th>
+		<td><!--{$RESULT.earnest}--></td>
+	</tr>
+
+	<tr><td colspan="2">&nbsp;</td></tr>
+
+	<tr>
+		<th>Статус</th>
+		<td>
+			<form method="post" action="<!--{$URL}-->admin/?page=<!--{$PAGE}-->&amp;action=edit&amp;id=<!--{$RESULT.id}-->">
+				<select name="status" style="width: 200px">
+					<option value="0" <!--{if $RESULT.confirmed}-->selected="selected"<!--{/if}-->>Непотвърдена</option>
+					<option value="1" <!--{if $RESULT.confirmed}-->selected="selected"<!--{/if}-->>Потвърдена</option>
+				</select>
+
+				<span class="button"><button type="submit">ОК</button></span>
+			</form>
+		</td>
+	</tr>
+</table>

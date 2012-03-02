@@ -1,0 +1,69 @@
+
+<form method="post" enctype="multipart/form-data" action="<!--{$URL}-->admin/?page=<!--{$PAGE}-->&amp;action=edit&amp;id=<!--{$ID}-->">
+
+	<table class="layout">
+		<caption>Редактиране на събитие</caption>
+		<tr>
+			<th>Клуб</th>
+			<td>
+				<select name="club" style="width: 200px">
+				<!--{section name=i loop=$CLUBS}-->
+					<option value="<!--{$CLUBS[i].id}-->" <!--{if $RESULT.club eq $CLUBS[i].id}-->selected="selected"<!--{/if}-->><!--{$CLUBS[i].name}--></option>
+				<!--{/section}-->
+				</select>
+			</td>
+		</tr>
+
+		<tr>
+			<th>Заглавие/Коментар</th>
+			<td>
+				<input type="text" class="text" name="comment" value="<!--{$RESULT.comment|escape}-->" />
+				<!--{if $ERRORS.comment}--><div class="small-error"><!--{$ERRORS.comment}--></div><!--{/if}-->
+			</td>
+		</tr>
+
+		<tr>
+			<th>Дата на събитието</th>
+			<td>
+				<input type="text" class="text datepicker" style="width: 120px" name="date" value="<!--{$RESULT.date|escape}-->" />
+				<!--{if $ERRORS.date}--><div class="small-error"><!--{$ERRORS.date}--></div><!--{/if}-->
+			</td>
+		</tr>
+
+		<tr>
+			<th>Час на събитието</th>
+			<td>
+				<input type="text" class="text hourSpin" style="width: 30px" name="hour" value="<!--{$RESULT.hour|escape|default:"12"}-->" /> :
+				<input type="text" class="text minuteSpin" style="width: 30px" name="minute" value="<!--{$RESULT.minute|escape|default:"00"}-->" />
+				<!--{if $ERRORS.hour}--><div class="small-error"><!--{$ERRORS.hour}--></div><!--{/if}-->
+			</td>
+		</tr>
+
+		<tr>
+			<th>URL адрес<br /><small>(т.е. http://example.com/file.html)</small></th>
+			<td>
+				<input type="text" class="text" name="url" value="<!--{$RESULT.url|escape}-->" />
+				<!--{if $ERRORS.url}--><div class="small-error"><!--{$ERRORS.url}--></div><!--{/if}-->
+			</td>
+		</tr>
+
+		<tr>
+			<th>Текуща снимка/плакат</th>
+			<td>
+				<a href="<!--{$RESULT.image}-->" class="zoom"><img src="<!--{$RESULT.thumb}-->" alt="" /></a>
+			</td>
+
+		</tr>
+
+		<tr>
+			<th>Нова снимка/плакат</th>
+			<td>
+				<input type="file" name="image" />
+				<!--{if $ERRORS.image}--><div class="small-error"><!--{$ERRORS.image}--></div><!--{/if}-->
+			</td>
+		</tr>
+	</table>
+
+<div class="buttons">
+	<span class="button"><button type="submit" name="submit">Редактиране</button></span>
+</div>

@@ -1,0 +1,34 @@
+<form method="post" enctype="multipart/form-data" action="<!--{$URL}-->admin/?page=<!--{$PAGE}-->&amp;action=edit&amp;id=<!--{$ID}-->">
+
+	<table class="layout">
+		<caption>Редакция на албум
+			( <a href="<!--{$URL}-->admin?page=<!--{$PAGE}-->&amp;action=add&amp;id=<!--{$ID}-->" title="Добавяне на снимки" ><img src="<!--{$IMG}-->add.png" alt="add" title="" /></a>
+			|
+			<a title="Преглед на снимките" href="<!--{$URL}-->admin/?page=<!--{$PAGE}-->&amp;action=view&amp;id=<!--{$ID}-->"><img src="<!--{$IMG}-->view.png" alt="" /></a> )
+		</caption> 
+		<tr>
+			<th>Клуб</th>
+			<td>
+				<select name="club" style="width: 200px" id="getAlbumsByClub">
+				<!--{section name=i loop=$CLUBS}-->
+					<option value="<!--{$CLUBS[i].id}-->" <!--{if $RESULT.club eq $CLUBS[i].id}-->selected="selected"<!--{/if}-->><!--{$CLUBS[i].name}--></option>
+				<!--{/section}-->
+				</select>
+				
+				<!--{if $ERRORS.club}--><div class="small-error"><!--{$ERRORS.club}--></div><!--{/if}-->
+			</td>
+		</tr>
+
+		<tr id="addAlbumName" class="<!--{if $RESULT.album}-->hidden<!--{/if}-->">
+			<th>Заглавие</th>
+			<td>
+				<input type="text" class="text" name="name" value="<!--{$RESULT.name|escape}-->" />
+				<!--{if $ERRORS.name}--><div class="small-error"><!--{$ERRORS.name}--></div><!--{/if}-->
+			</td>
+		</tr>
+
+	</table>
+
+<div class="buttons">
+	<span class="button"><button type="submit" name="submit">Редакция</button></span>
+</div>

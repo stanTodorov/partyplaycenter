@@ -1,0 +1,13 @@
+<h3><!--{$CLUB}--></h3>
+
+<ul class="gallery">
+<!--{section name=i loop=$RESULT}-->
+	<li>
+		<a class="zoom" rel="gallery" title="<!--{$RESULT[i].date}-->: <!--{$RESULT[i].comment}-->" href="<!--{$RESULT[i].image}-->">
+			<img src="<!--{$RESULT[i].thumb}-->" alt="" />
+			<span><!--{$RESULT[i].date}--></span>
+		</a>
+	</li>
+
+<!--{/section}-->
+</ul>

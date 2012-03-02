@@ -1,0 +1,95 @@
+<div class="searchbar">
+	<div class="filter">
+		<div class="search">
+			<form method="get" action="<!--{$URL}-->admin/" >
+				<input type="hidden" name="page" value="<!--{$PAGE}-->" />
+				<input type="text" value="<!--{$SEARCH|escape}-->" class="text" name="search" /><span class="search-button"><input type="submit" value="&nbsp;" class="submit" name="търсене" /></span>
+			</form>
+		</div>
+		<div class="operations">
+			<a class="button" href="<!--{$URL}-->admin/?page=<!--{$PAGE}-->&amp;action=add"><img alt="" src="<!--{$IMG}-->add.png" /> Нов запис</a>
+		</div>
+	</div>
+
+	<!--{if $ORDERS}-->
+	<div class="orders">
+		<ul>
+		<!--{foreach from=$ORDERS key=k item=i name="orders"}-->
+			<li>
+			<!--{if $i.order|lower eq "asc"}-->
+				<a class="icon" title="Низходящо сортиране" href="<!--{$URL}-->admin/?page=<!--{$PAGE}-->&amp;sort=<!--{$i.key}-->&amp;order=desc&amp;search=<!--{$SEARCH|escape}-->"><span class="down"></span><!--{$i.name}--></a>
+			<!--{else}-->
+				<a class="icon" title="Възходящо сортиране" href="<!--{$URL}-->admin/?page=<!--{$PAGE}-->&amp;sort=<!--{$i.key}-->&amp;order=asc&amp;search=<!--{$SEARCH|escape}-->"><span class="up"></span><!--{$i.name}--></a>
+			<!--{/if}-->
+				<a class="icon remove" title="Премахване" href="<!--{$URL}-->admin/?page=<!--{$PAGE}-->&amp;sort=<!--{$i.key}-->&amp;delorder=&amp;search=<!--{$SEARCH|escape}-->"><span class="empty remove"></span></a>
+			</li>
+		<!--{/foreach}-->
+		</ul>
+	</div>
+	<!--{/if}-->
+</div>
+
+<table class="list">
+	<thead>
+		<tr>
+			<th title="Сортиране по категория">
+				<a href="<!--{$URL}-->admin?page=<!--{$PAGE}-->&amp;sort=category&amp;order=<!--{$ORDER|default:"asc"}-->&amp;search=<!--{$SEARCH|escape}-->">Категория</a>
+			</th>
+
+			<th style="width: 56px" title="Сортиране по изображение">
+				<a href="<!--{$URL}-->admin?page=<!--{$PAGE}-->&amp;sort=image&amp;order=<!--{$ORDER|default:"asc"}-->&amp;search=<!--{$SEARCH|escape}-->">Снимка</a>
+			</th>
+
+			<th title="Сортиране по Наименование">
+				<a href="<!--{$URL}-->admin?page=<!--{$PAGE}-->&amp;sort=name&amp;order=<!--{$ORDER|default:"asc"}-->&amp;search=<!--{$SEARCH|escape}-->">Наименование</a>
+			</th>
+
+			<th title="Сортиране по Количество">
+				<a href="<!--{$URL}-->admin?page=<!--{$PAGE}-->&amp;sort=amount&amp;order=<!--{$ORDER|default:"asc"}-->&amp;search=<!--{$SEARCH|escape}-->">Количество</a>
+			</th>
+
+			<th title="Сортиране по цена">
+				<a href="<!--{$URL}-->admin?page=<!--{$PAGE}-->&amp;sort=price&amp;order=<!--{$ORDER|default:"asc"}-->&amp;search=<!--{$SEARCH|escape}-->">Ед. цена</a>
+			</th>
+
+			<th  style="width: 120px">Операции</th>
+		</tr>
+	</thead>
+	<tfoot>
+		<tr>
+			<th colspan="6">Общо: <!--{$COUNT|default:0}--></th>
+		</tr>
+	</tfoot>
+	<tbody>
+	<!--{section name=i loop=$RESULT}-->
+		<tr <!--{if $smarty.section.i.index is not even}--> class="odd" <!--{/if}-->>
+			<td class="center"><!--{$RESULT[i].category}--></td>
+			<td class="center">
+				<!--{if $RESULT[i].thumb && $RESULT[i].image}-->
+				<span class="showThumb" data-url="<!--{$RESULT[i].thumb}-->">
+					<a class="zoom" href="<!--{$RESULT[i].image}-->"><img src="<!--{$IMG}-->pictures.png" alt="edit" title="" /></a>
+				</span>
+				<!--{/if}-->
+			</td>
+			<td>
+				<!--{$RESULT[i].name}-->
+				<!--{if $RESULT[i].comment}--><small class="nl">(<!--{$RESULT[i].comment}-->)</small><!--{/if}-->
+			</td>
+			<td class="center"><!--{$RESULT[i].amount}--></td>
+			<td class="center"><!--{$RESULT[i].price}--> лв.</td>
+
+			<td class="center">
+				<a href="<!--{$URL}-->admin?page=<!--{$PAGE}-->&amp;action=edit&amp;id=<!--{$RESULT[i].id}-->" title="Редакция на албума" ><img src="<!--{$IMG}-->edit.png" alt="edit" title="" /></a>
+				|
+				<a data-warning="true" href="<!--{$URL}-->admin?page=<!--{$PAGE}-->&amp;action=delete&amp;token=<!--{$TOKEN}-->&amp;id=<!--{$RESULT[i].id}-->" title="Изтриване" ><img src="<!--{$IMG}-->delete.png" alt="delete" title="" /></a>
+			</td>
+		</tr>
+	<!--{sectionelse}-->
+		<tr>
+			<td colspan="6" class="center">Няма намерени резултати!</td>
+		</tr>
+	<!--{/section}-->
+	</tbody>
+</table>
+
+<!--{if $PAGING}--><div class="navigation"><!--{$PAGING}--></div><!--{/if}-->

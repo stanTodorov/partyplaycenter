@@ -1,0 +1,30 @@
+<h3>Албум „<!--{$ALBUM.name|escape}-->“ (
+	<a href="<!--{$URL}-->admin?page=<!--{$PAGE}-->&amp;action=add&amp;id=<!--{$ALBUM.id}-->" title="Добавяне на снимки" ><img src="<!--{$IMG}-->add.png" alt="add" title="" /></a>
+	|
+	<a title="Редакция на албум" href="<!--{$URL}-->admin/?page=<!--{$PAGE}-->&amp;action=edit&amp;id=<!--{$ALBUM.id}-->"><img src="<!--{$IMG}-->edit.png" alt="" /></a> )
+</h3>
+
+<!--{if $RESULT}-->
+<form method="post" action="<!--{$URL}-->admin/?page=<!--{$PAGE}-->&amp;action=default">
+	<ul class="album-gallery">
+	<!--{section name=i loop=$RESULT}-->
+		<li <!--{if $RESULT[i].checked}-->class="active"<!--{/if}-->>
+			<a href="<!--{$RESULT[i].image}-->" class="zoom" rel="gallery"><span class="image" style="background-image: url('<!--{$RESULT[i].thumb}-->')"></span></a>
+
+			<a class="remove" data-warning="true" href="<!--{$URL}-->admin/?page=<!--{$PAGE}-->&amp;action=removePicture&amp;id=<!--{$RESULT[i].id}-->&amp;token=<!--{$TOKEN}-->" title="Премахване на снимката"></a>
+
+			<input type="radio" class="hidden" name="default" value="<!--{$RESULT[i].id}-->" <!--{if $RESULT[i].checked}-->checked="checked"<!--{/if}--> />
+		</li>
+	<!--{/section}-->
+	</ul>
+
+	<div class="buttons" style="text-align: left">
+		<span class="button"><button type="submit" name="submit">Промени албумната снимка</button></span>
+	</div>
+</form>
+<!--{else}-->
+
+<div class="empty-album-gallery">Няма намерени снимки в този албум!</div>
+
+<!--{/if}-->
+

@@ -1,0 +1,72 @@
+
+<form method="post" enctype="multipart/form-data" action="<!--{$URL}-->admin/?page=<!--{$PAGE}-->&amp;action=edit&amp;id=<!--{$ID}-->">
+
+	<table class="layout">
+		<caption>Редакция на запис от меню</caption>
+		<tr>
+			<th>Категория</th>
+			<td>
+				<select name="category" style="width: 200px">
+				<!--{section name=i loop=$CATEGORIES}-->
+					<option value="<!--{$CATEGORIES[i].id}-->" <!--{if $RESULT.category eq $CATEGORIES[i].id}-->selected="selected"<!--{/if}-->><!--{$CATEGORIES[i].name|escape}--></option>
+				<!--{/section}-->
+				</select>
+
+				<!--{if $ERRORS.club}--><div class="small-error"><!--{$ERRORS.club}--></div><!--{/if}-->
+			</td>
+		</tr>
+		<tr>
+			<th>Наименование</th>
+			<td>
+				<input type="text" class="text" name="name" value="<!--{$RESULT.name|escape}-->" />
+				<!--{if $ERRORS.name}--><div class="small-error"><!--{$ERRORS.name}--></div><!--{/if}-->
+			</td>
+		</tr>
+		<tr>
+			<th>Описание (коментар)</th>
+			<td>
+				<input type="text" class="text" name="comment" value="<!--{$RESULT.comment|escape}-->" />
+				<!--{if $ERRORS.comment}--><div class="small-error"><!--{$ERRORS.comment}--></div><!--{/if}-->
+			</td>
+		</tr>
+		<tr>
+			<th>Количество (kg/бр.)</th>
+			<td>
+				<input type="text" class="text" style="width: 120px" name="amount" value="<!--{$RESULT.amount|escape}-->" />
+				<!--{if $ERRORS.amount}--><div class="small-error"><!--{$ERRORS.amount}--></div><!--{/if}-->
+			</td>
+		</tr>
+		<tr>
+			<th>Цена</th>
+			<td>
+				<input type="text" class="text" style="width: 120px" name="price" value="<!--{$RESULT.price|escape}-->" /> лв.
+				<!--{if $ERRORS.price}--><div class="small-error"><!--{$ERRORS.price}--></div><!--{/if}-->
+			</td>
+		</tr>
+
+		<tr>
+			<th>Текуща снимка</th>
+			<td>
+			<!--{if $RESULT.thumb}-->
+				<a class="zoom" href="<!--{$RESULT.image}-->">
+					<span class="image" style="background-image: url('<!--{$RESULT.thumb}-->')"></span>
+				</a>
+			<!--{/if}-->
+			</td>
+		</tr>
+		<tr>
+			<th>Снимка</th>
+			<td>
+				<div><input type="file" name="image" /></div>
+				<!--{if $ERRORS.image}--><div class="small-error"><!--{$ERRORS.image}--></div><!--{/if}-->
+			</td>
+		</tr>
+		<tr>
+			<th>&nbsp;</th>
+			<td>Максимален размер на прикачената снимка: <strong><!--{$UPLOAD_LIMIT}--></strong></td>
+		</tr>
+	</table>
+	<div class="buttons">
+		<span class="button"><button type="submit" name="submit">Редакция</button></span>
+	</div>
+</form>

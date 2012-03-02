@@ -1,0 +1,45 @@
+<!--{if $SUCCESS}--><div class="success"><!--{$SUCCESS}--></div>
+<!--{else if $ERROR}--><div class="error"><!--{$ERROR}--></div>
+<!--{/if}-->
+
+<form method="post" action="<!--{$URL}-->admin/?page=<!--{$PAGE}-->&amp;token=<!--{$TOKEN}-->" >
+	<table class="layout">
+		<caption>Смяна на потребителската парола</caption>
+		<tr>
+			<th>Име</th>
+			<td><!--{$RESULT.name}--></td>
+		</tr>
+		<tr>
+			<th>Потребителско име</th>
+			<td>
+				<input type="username" class="text" name="username" value="<!--{$RESULT.username|escape}-->" />
+				<!--{if $ERRORS.username}--><div class="small_error"><!--{$ERRORS.username}--></div><!--{/if}-->
+			</td>
+		</tr>
+		<tr>
+			<th>Парола</th>
+			<td>
+				<input type="password" class="text" name="password" value="" />
+				<!--{if $ERRORS.password}--><div class="small_error"><!--{$ERRORS.password}--></div><!--{/if}-->
+			</td>
+		</tr>
+		<tr>
+			<th>Парола (отново)</th>
+			<td>
+				<input type="password" class="text" name="password2" value=""  />
+				<!--{if $ERRORS.password2}--><div class="small_error"><!--{$ERRORS.password2}--></div><!--{/if}-->
+			</td>
+		</tr>
+		<tr>
+			<th>Текуща парола</th>
+			<td>
+				<input type="password" class="text" name="oldpassword" value=""  />
+				<!--{if $ERRORS.oldpassword}--><div class="small_error"><!--{$ERRORS.oldpassword}--></div><!--{/if}-->
+			</td>
+		</tr>
+	</table>
+	<div class="buttons">
+		<input type="hidden" name="token" value="<!--{$TOKEN}-->" />
+		<span class="button"><button type="submit" name="submit">Редакция</button></span>
+	</div>
+</form>

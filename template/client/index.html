@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="<!--{$LANG}-->">
+	<head>
+		<meta charset="utf-8" />
+		<title>PartyPlay Center <!--{$TITLE}--></title>
+		<link href="<!--{$CSS}-->general.css?<!--{$LAST_UPDATE}-->" rel="stylesheet" type="text/css" />
+		<link href="<!--{$CSS_COMMON}-->jquery-plugins.css?<!--{$LAST_UPDATE}-->" rel="stylesheet" type="text/css" />
+		<link rel="shortcut icon" href="<!--{$URL}-->favicon.ico?<!--{$LAST_UPDATE}-->" />
+	</head>
+	<body>
+		<div id="container">
+			<div class="glow"></div>
+			<div class="wrapper">
+				<div id="header">
+					<a href="<!--{$URL}-->" id="logo"></a>
+					<h1>Формуляр за онлайн резервации</h1>
+
+					<ul id="menu">
+						<li <!--{if $CLUB_ID eq 1}-->class="active"<!--{/if}-->>
+							<a class="party-center" href="<!--{$URL}-->party-center"><span>Парти център</span></a>
+						</li>
+
+						<li <!--{if $CLUB_ID eq 2}-->class="active"<!--{/if}-->>
+							<a class="hiclub" href="<!--{$URL}-->hiclub"><span>Диското клуб</span></a>
+						</li>
+
+						<li <!--{if $PAGE eq 'events'}-->class="active"<!--{/if}-->>
+							<a class="events" href="<!--{$URL}-->events"><span>Актуални Събития</span></a>
+						</li>
+
+						<li <!--{if $PAGE eq 'reservations'}-->class="active"<!--{/if}-->>
+							<a class="reservations" href="<!--{$URL}-->reservations"><span>Резервации</span></a>
+						</li>
+
+						<li <!--{if $PAGE eq 'online-shop'}-->class="active"<!--{/if}-->>
+							<a class="online-shop" href="<!--{$URL}-->online-shop"><span>Онлайн магазина</span></a>
+						</li>
+
+						<li <!--{if $PAGE eq 'contacts'}-->class="active"<!--{/if}-->>
+							<a class="contacts" href="<!--{$URL}-->contacts"><span>Контакти</span></a>
+						</li>
+					</ul>
+
+					<a id="reserve" href="<!--{$URL}-->reservations">Резервирай</a>
+
+					<div id="tv">
+						<div class="screen">
+							<ul>
+							<!--{section name=i loop=$TV_EVENTS}-->
+								<li>
+									<div class="logo">
+										<img src="<!--{$IMG}-->logo/<!--{$TV_EVENTS[i].logo}-->" alt="" />
+
+										<div class="info">
+											<!--{$TV_EVENTS[i].date}-->
+										<!--{if $TV_EVENTS[i].url}-->
+											<a href="<!--{$TV_EVENTS[i].url}-->" data-link-external="true" title="Повече информация"><img src="<!--{$IMG_COMMON}-->link.png" alt="" /></a>
+										<!--{/if}-->
+										</div>
+
+									</div>
+
+									<a class="zoom" title="<!--{$TV_EVENTS[i].category}--> от <!--{$TV_EVENTS[i].datefull}-->: <!--{$TV_EVENTS[i].comment|escape}-->" href="<!--{$TV_EVENTS[i].image}-->" data-fancybox-group="tv-gallery">
+										<img class="event" src="<!--{$TV_EVENTS[i].thumb}-->" alt="" />
+									</a>
+
+
+								</li>
+							<!--{/section}-->
+							</ul>
+						</div>
+					</div>
+				</div>
+
+				<div id="content">
+					<!--{if $PAGE}--><!--{include file="`$PAGE`.html"}--><!--{/if}-->
+				</div>
+
+			</div>
+		</div>
+
+		<div id="footer">
+			<div class="wrapper">
+				Party Play Center, гр. Варна, ул. "Чаталджа" 22 (Пикадили Чаталджа ет. 2)  &nbsp; &nbsp; &nbsp; тел.: 052/ 600-957 &nbsp; &nbsp; &nbsp; моб.: 087/ 6600-958<br/>
+				e-mail: <a href="mailto:office@partyplay-varna.com">office@partyplay-varna.com</a> и <a href="mailto:yovchev@partyplay-varna.com">yovchev@partyplay-varna.com</a> <br />
+			</div>
+		</div>
+
+		<div id="overlay">
+			<div class="loading"></div>
+		</div>
+
+		<script type="text/javascript">
+			var URL = '<!--{$URL}-->';
+		</script>
+		<script type="text/javascript" src="<!--{$JS_COMMON}-->jquery.js?<!--{$LAST_UPDATE}-->"></script>
+		<script type="text/javascript" src="<!--{$JS_COMMON}-->jquery-plugins.js?<!--{$LAST_UPDATE}-->"></script>
+		<script type="text/javascript" src="<!--{$JS}-->general.js?<!--{$LAST_UPDATE}-->"></script>
+		<script type="text/javascript">
+			var _gaq = _gaq || [];
+			_gaq.push(['_setAccount', 'UA-29661300-1']);
+			_gaq.push(['_trackPageview']);
+
+			(function() {
+				var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+				var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			})();
+		</script>
+	</body>
+</html>

@@ -1,0 +1,95 @@
+<div class="searchbar">
+	<div class="filter">
+		<div class="search">
+			<form method="get" action="<!--{$URL}-->admin/" >
+				<input type="hidden" name="page" value="<!--{$PAGE}-->" />
+				<input type="text" value="<!--{$SEARCH|escape}-->" class="text" name="search" /><span class="search-button"><input type="submit" value="&nbsp;" class="submit" name="търсене" /></span>
+			</form>
+		</div>
+		<div class="operations">
+			Клуб:
+			<form method="post" action="<!--{$URL}-->admin/?page=<!--{$PAGE}-->" style="display: inline">
+				<select name="club" style="width: 160px" class="autosubmit">
+				<!--{section name=i loop=$CLUBS}-->
+					<option value="<!--{$CLUBS[i].id}-->" <!--{if $CLUBS[i].id eq $CLUB}-->selected="selected"<!--{/if}-->><!--{$CLUBS[i].name}--></option>
+				<!--{/section}-->
+				</select>
+
+				<noscript><span class="button"><button type="submit">OK</button></span></noscript>
+			</form>
+
+			<a class="button" href="<!--{$URL}-->admin/?page=<!--{$PAGE}-->&amp;action=add"><img alt="" src="<!--{$IMG}-->add.png" /> Ново събитие</a>
+		</div>
+	</div>
+
+	<!--{if $ORDERS}-->
+	<div class="orders">
+		<ul>
+		<!--{foreach from=$ORDERS key=k item=i name="orders"}-->
+			<li>
+			<!--{if $i.order|lower eq "asc"}-->
+				<a class="icon" title="Низходящо сортиране" href="<!--{$URL}-->admin/?page=<!--{$PAGE}-->&amp;sort=<!--{$i.key}-->&amp;order=desc&amp;search=<!--{$SEARCH|escape}-->"><span class="down"></span><!--{$i.name}--></a>
+			<!--{else}-->
+				<a class="icon" title="Възходящо сортиране" href="<!--{$URL}-->admin/?page=<!--{$PAGE}-->&amp;sort=<!--{$i.key}-->&amp;order=asc&amp;search=<!--{$SEARCH|escape}-->"><span class="up"></span><!--{$i.name}--></a>
+			<!--{/if}-->
+				<a class="icon remove" title="Премахване" href="<!--{$URL}-->admin/?page=<!--{$PAGE}-->&amp;sort=<!--{$i.key}-->&amp;delorder=&amp;search=<!--{$SEARCH|escape}-->"><span class="empty remove"></span></a>
+			</li>
+		<!--{/foreach}-->
+		</ul>
+	</div>
+	<!--{/if}-->
+</div>
+
+<table class="list">
+	<thead>
+		<tr>
+			<th style="width: 200px">Снимка</th>
+
+			<th title="Сортиране по Заглавие/Коментар">
+				<a href="<!--{$URL}-->admin?page=<!--{$PAGE}-->&amp;sort=name&amp;order=<!--{$ORDER|default:"asc"}-->&amp;search=<!--{$SEARCH|escape}-->">Заглавие
+			</th>
+
+			<th title="Сортиране по дата на събитието">
+				<a href="<!--{$URL}-->admin?page=<!--{$PAGE}-->&amp;sort=date&amp;order=<!--{$ORDER|default:"asc"}-->&amp;search=<!--{$SEARCH|escape}-->">Дата
+			</th>
+
+			<th title="Сортиране по дата и час на изпращане">
+				<a href="<!--{$URL}-->admin?page=<!--{$PAGE}-->&amp;sort=added&amp;order=<!--{$ORDER|default:"asc"}-->&amp;search=<!--{$SEARCH|escape}-->">Добавено
+			</th>
+
+			<th  style="width: 120px">Операции</th>
+		</tr>
+	</thead>
+	<tfoot>
+		<tr>
+			<th colspan="5">Общо: <!--{$COUNT|default:0}--></th>
+		</tr>
+	</tfoot>
+	<tbody>
+	<!--{section name=i loop=$RESULT}-->
+		<tr <!--{if $smarty.section.i.index is not even}--> class="odd" <!--{/if}-->>
+			<td class="center">
+				<a href="<!--{$RESULT[i].image}-->" data-link-external="true"><img src="<!--{$RESULT[i].thumb}-->" width="60" alt="" /></a>
+			</td>
+			<td>
+				<!--{$RESULT[i].comment}-->
+				<!--{if $RESULT[i].url}--><a data-link-external="true" href="<!--{$RESULT[i].url}-->" title="Връзка към събитието"><img src="<!--{$IMG_COMMON}-->link.png" alt="" /></a><!--{/if}-->
+			</td>
+			<td class="center"><!--{$RESULT[i].date}--></td>
+			<td class="center"><!--{$RESULT[i].added}--></td>
+
+			<td class="center">
+				<a href="<!--{$URL}-->admin?page=<!--{$PAGE}-->&amp;action=edit&amp;id=<!--{$RESULT[i].id}-->" title="Редактиране" ><img src="<!--{$IMG}-->edit.png" alt="edit" title="" /></a>
+				|
+				<a data-warning="true" href="<!--{$URL}-->admin?page=<!--{$PAGE}-->&amp;action=delete&amp;token=<!--{$TOKEN}-->&amp;id=<!--{$RESULT[i].id}-->" title="Изтриване" ><img src="<!--{$IMG}-->delete.png" alt="delete" title="" /></a>
+			</td>
+		</tr>
+	<!--{sectionelse}-->
+		<tr>
+			<td colspan="5" class="center">Няма намерени резултати!</td>
+		</tr>
+	<!--{/section}-->
+	</tbody>
+</table>
+
+<!--{if $PAGING}--><div class="navigation"><!--{$PAGING}--></div><!--{/if}-->
