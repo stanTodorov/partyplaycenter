@@ -120,6 +120,10 @@ small.nl { display: block }
 	height: 100%;
 }
 
+#footer .nastech {
+	float: right;
+}
+
 #container .glow {
 	background: url('./../images/bg-container.jpg') top center no-repeat;
 	position: absolute;
