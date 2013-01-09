@@ -1,5 +1,5 @@
 <?php
-if (!defined('PROGRAM') && PROGRAM !== 1) exit;
+if (!defined('PROGRAM') || PROGRAM !== 1) exit;
 
 function Main()
 {
